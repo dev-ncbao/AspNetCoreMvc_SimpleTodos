@@ -1,0 +1,24 @@
+@model IEnumerable<TodoMVC.Contracts.TodoViewModel>
+
+<h2>List todo: @Model.Count()</h2>
+<button>
+    <a asp-controller="home" asp-action="createtodo">Add new todo</a>
+</button>
+@foreach (var (todo, index) in Model.Select((todo, index) => (todo, index)))
+{
+
+    <ul>
+        <li>#@index</li>
+        <li>Task name: @todo.Name</li>
+        <li>Status: @todo.Status</li>
+        <li>
+            Actions:
+            <button>
+                <a asp-controller="home" asp-action="edittodo" asp-route-id="@todo.Id">Edit</a>
+            </button>
+            <button>
+                <a asp-controller="home" asp-action="delete">Delete</a>
+            </button>
+        </li>
+    </ul>
+}
